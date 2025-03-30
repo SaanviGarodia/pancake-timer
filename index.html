@@ -4,67 +4,55 @@
     <title>Pancake Timer</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
             text-align: center;
-            padding: 20px;
+            font-family: Arial, sans-serif;
         }
         #timer {
             font-size: 2em;
             margin: 20px;
         }
-        pre {
-            background: #f4f4f4;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: left;
+        #pancake {
+            width: 100px;
+            height: 100px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Pancakes.jpg/640px-Pancakes.jpg') no-repeat center;
+            background-size: cover;
             display: inline-block;
+            transform: rotate(0deg);
+            transition: transform 0.5s ease-in-out;
+        }
+        .flip {
+            transform: rotate(180deg);
         }
     </style>
 </head>
 <body>
-
     <h1>Pancake Cooking Timer</h1>
-    <p>Start the timer to cook a perfect pancake (90 seconds per side)!</p>
+    <div id="timer">00:00</div>
+    <div id="pancake"></div>
+    <br>
+    <button onclick="startTimer()">Start</button>
+    <button onclick="stopTimer()">Stop</button>
     
-    <button onclick="startTimer()">Start Timer</button>
-    <div id="timer">90</div>
-
-    <h2>Code Used:</h2>
-    <pre>
-        &lt;script&gt;
-        let timeLeft = 90;
-        let timer;
+    <script>
+        let timerInterval;
+        let seconds = 0;
+        let pancake = document.getElementById('pancake');
 
         function startTimer() {
-            document.getElementById("timer").textContent = timeLeft;
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById("timer").textContent = timeLeft;
-                if (timeLeft === 0) {
-                    clearInterval(timer);
-                    alert("Flip the pancake!");
-                }
+            if (timerInterval) return; // Prevent multiple timers
+            timerInterval = setInterval(() => {
+                seconds++;
+                document.getElementById('timer').textContent = new Date(seconds * 1000).toISOString().substr(14, 5);
+                pancake.classList.toggle('flip'); // Flipping animation
             }, 1000);
         }
-        &lt;/script&gt;
-    </pre>
 
-    <script>
-        let timeLeft = 90;
-        let timer;
-
-        function startTimer() {
-            document.getElementById("timer").textContent = timeLeft;
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById("timer").textContent = timeLeft;
-                if (timeLeft === 0) {
-                    clearInterval(timer);
-                    alert("Flip the pancake!");
-                }
-            }, 1000);
+        function stopTimer() {
+            clearInterval(timerInterval);
+            timerInterval = null;
         }
     </script>
-
 </body>
 </html>
+ 
+
