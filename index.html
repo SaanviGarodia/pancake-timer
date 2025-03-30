@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Pancake Timer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        #timer {
+            font-size: 2em;
+            margin: 20px;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: left;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Pancake Cooking Timer</h1>
+    <p>Start the timer to cook a perfect pancake (90 seconds per side)!</p>
+    
+    <button onclick="startTimer()">Start Timer</button>
+    <div id="timer">90</div>
+
+    <h2>Code Used:</h2>
+    <pre>
+        &lt;script&gt;
+        let timeLeft = 90;
+        let timer;
+
+        function startTimer() {
+            document.getElementById("timer").textContent = timeLeft;
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    alert("Flip the pancake!");
+                }
+            }, 1000);
+        }
+        &lt;/script&gt;
+    </pre>
+
+    <script>
+        let timeLeft = 90;
+        let timer;
+
+        function startTimer() {
+            document.getElementById("timer").textContent = timeLeft;
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").textContent = timeLeft;
+                if (timeLeft === 0) {
+                    clearInterval(timer);
+                    alert("Flip the pancake!");
+                }
+            }, 1000);
+        }
+    </script>
+
+</body>
+</html>
